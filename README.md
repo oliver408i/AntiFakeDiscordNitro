@@ -3,7 +3,7 @@
 We have seen that in the last time many discord servers are infected by fake discord nitro links we want to put an end to this and have developed a small open source bot that blocks them.
 
 ## Currently blocked websites
-- 7
+- 8
 
 ## Installation
 
