@@ -7,10 +7,11 @@ We have seen that in the last time many discord servers are infected by fake dis
 
 ## Installation
 
-Use git clone to copy the bot and
+Use git clone to copy the bot start
 
 ```bash
 git clone https://github.com/BadTigerMC/AntiFakeDiscordNitro.git
+python3 Bot.py
 ```
 
 ## Usage
