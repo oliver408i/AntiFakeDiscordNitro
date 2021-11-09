@@ -7,7 +7,7 @@ We have seen that in the last time many discord servers are infected by fake dis
 
 ## Installation
 
-Use git clone to copy the bot start
+Use git clone to copy the bot and start
 
 ```bash
 git clone https://github.com/BadTigerMC/AntiFakeDiscordNitro.git
