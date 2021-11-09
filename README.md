@@ -14,7 +14,7 @@ git clone https://github.com/BadTigerMC/AntiFakeDiscordNitro.git
 python3 Bot.py
 ```
 
-## Usage
+## Invite
 
 Invite Discord-Bot: https://invite.badtigermc.de
 
