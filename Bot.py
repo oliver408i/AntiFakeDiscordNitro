@@ -11,7 +11,7 @@ import re
 bot = commands.Bot(command_prefix="!")
 bot.remove_command("help")
 
-token = 'OTM1Njk5NzE4OTU1MjE2OTE4.YfCcRQ.rHV5otS7HvMK5Hea-Cm2L2qDif0'
+token = 'TOKEN HERE'
 with open('blacklist.txt', 'r') as file:
   blacklist = file.read().splitlines()
 nitroscans = [item for item in blacklist if not(item == '' or item.startswith('#'))]
