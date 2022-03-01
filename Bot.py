@@ -6,38 +6,42 @@ import os
 import re
 
 # This is about the config -> config.json
-if os.path.exists(os.getcwd() + "/config.json"):
-    with open("./config.json") as f:
-        configData = json.load(f)
-    pass
-else:
-    config = {"Token": "", "Prefix": "", "bannedLinks": []}
-    with open(os.getcwd() + "/config.json", "w+") as f:
-        json.dump(config, f)
+
 
 bot = commands.Bot(command_prefix="!")
 bot.remove_command("help")
 
-token = configData["Token"]
-bannedLinks = configData["bannedLinks"]
-
+token = 'OTM1Njk5NzE4OTU1MjE2OTE4.YfCcRQ.rHV5otS7HvMK5Hea-Cm2L2qDif0'
+with open('blacklist.txt', 'r') as file:
+  blacklist = file.read().splitlines()
+nitroscans = [item for item in blacklist if not(item == '' or item.startswith('#'))]
+with open('rickroll.txt', 'r') as file:
+  blacklist = file.read().splitlines()
+rickroll = [item for item in blacklist if not(item == '' or item.startswith('#'))]
 # This is about Bot Status & Login
 @bot.event
 async def on_ready():
     print("Bot is Online")
 
 # This is about Link Blocker + Word Blocker
-
+async def checkMessage(message, list, reason):
+    if list != None and (isinstance(message.channel, discord.channel.DMChannel) == False):
+        for bannedLink in list:
+            if msg_contains_word(message.content.lower(), bannedLink):
+                await message.delete()
+                await message.channel.send('***BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Reason:** ' + str(reason))
 def msg_contains_word(msg, word):
-    return re.search(fr"\b({word})\b", msg) is not None
+    if word in msg.lower():
+        return True
+    else:
+        return False
+    #return re.search(fr"\b({word})\b", msg) is not None
 
 @bot.event
 async def on_message(message):
-    messageAuthor = message.author
-    if bannedLinks != None and (isinstance(message.channel, discord.channel.DMChannel) == False):
-        for bannedLink in bannedLinks:
-            if msg_contains_word(message.content.lower(), bannedLink):
-                await message.delete()
+    await checkMessage(message, nitroscans, 'Nitro Scam')
+    await checkMessage(message, rickroll, 'Rickroll')
+
     await bot.process_commands(message)
 
 
