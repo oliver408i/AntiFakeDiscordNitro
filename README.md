@@ -5,6 +5,7 @@ We have seen that in the last time many discord servers are infected by fake dis
 ## Currently blocked websites
 - 10700 Nitro scams
 - 4 Rickrolls sites
+- 57 Really bad words
 
 ## Installation
 
