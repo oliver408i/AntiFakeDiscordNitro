@@ -44,7 +44,7 @@ async def linkCheck(message, list, reason):
             if msg_contains_word(message.content.lower(), bannedLink):
                 await message.delete()
                 await message.channel.send('***SECURLY BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Reason:** ' + str(reason))
-                channel = bot.get_channel(895114109689946122) #<- id of admin/audit log channel
+                channel = bot.get_channel(0000000000000) #<- id of admin/audit log channel
                 await channel.send('***SECURLY BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Message:** ' + str(message.content)+'\n**Channel:** <#'+str(message.channel.id)+'>\n**Reason:** ' + str(reason))
                 return True
 def msg_contains_word(msg, word):
