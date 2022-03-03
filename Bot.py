@@ -64,7 +64,7 @@ async def wordCheck(message, reason = 'Banned word: '):
             if msg_contains_word(message.content.lower(), bannedLink):
                 await message.delete()
                 await message.channel.send('***SECURLY BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Reason:** ' + str(reason)+ bannedLink)
-                channel = bot.get_channel(895114109689946122)#<- same here
+                channel = bot.get_channel(0000000000000000)#<- same here
                 await channel.send('***SECURLY BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Message:** ' + str(message.content)+'\n**Channel:** <#'+str(message.channel.id)+'>\n**Reason:** ' + str(reason) + bannedLink)
                 return True
 @bot.event
