@@ -4,19 +4,8 @@ from discord.ext import commands
 from flask import Flask
 from threading import Thread
 idWhitelist = ['ids', 'of', 'whitelisted', 'channels]
-app = Flask('')
-
-@app.route('/')
-def home():
-    return "Server connected bot up"
-
-def run():
-    app.run(host='0.0.0.0',port=8080)
-t = Thread(target=run)
-t.start()
-# This is about the config -> config.json
-
-
+auditLogId = '' #Audit log channel id here
+               
 bot = commands.Bot(command_prefix="!")
 bot.remove_command("help")
 
@@ -44,7 +33,7 @@ async def linkCheck(message, list, reason):
             if msg_contains_word(message.content.lower(), bannedLink):
                 await message.delete()
                 await message.channel.send('***SECURLY BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Reason:** ' + str(reason))
-                channel = bot.get_channel(0000000000000) #<- id of admin/audit log channel
+                channel = bot.get_channel(auditLogId)
                 await channel.send('***SECURLY BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Message:** ' + str(message.content)+'\n**Channel:** <#'+str(message.channel.id)+'>\n**Reason:** ' + str(reason))
                 return True
 def msg_contains_word(msg, word):
@@ -64,7 +53,7 @@ async def wordCheck(message, reason = 'Banned word: '):
             if msg_contains_word(message.content.lower(), bannedLink):
                 await message.delete()
                 await message.channel.send('***SECURLY BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Reason:** ' + str(reason)+ bannedLink)
-                channel = bot.get_channel(0000000000000000)#<- same here
+                channel = bot.get_channel(auditLogId)#<- same here
                 await channel.send('***SECURLY BLOCKED***\n*The message has been deleted!*\n**Author:** <@' + str(message.author.id) + '>\n**Message:** ' + str(message.content)+'\n**Channel:** <#'+str(message.channel.id)+'>\n**Reason:** ' + str(reason) + bannedLink)
                 return True
 @bot.event
@@ -72,12 +61,9 @@ async def on_message(message):
     if message.author.bot:
         return
     if await linkCheck(message, nitroscans, 'Nitro Scam') or await linkCheck(message, rickroll, 'Rickroll') or await linkCheck(message, ads, 'Promo/Advertisement'):
-        if await wordCheck(message):
-                
-            await bot.process_commands(message)
-            return
+        pass
+    elif await wordCheck(message):   
+        await bot.process_commands(message)
+        return
     await bot.process_commands(message)
-try:
-    bot.run(token)
-except discord.errors.HTTPException:
-    os.system("kill 1")
+ bot.run(token)
